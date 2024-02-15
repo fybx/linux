@@ -1098,6 +1098,8 @@ void msft_vendor_evt(struct hci_dev *hdev, void *data, struct sk_buff *skb)
 
 	switch (*evt) {
 	case MSFT_EV_LE_MONITOR_DEVICE:
+		if (skb->len == 6)
+			break;
 		mutex_lock(&msft->filter_lock);
 		msft_monitor_device_evt(hdev, skb);
 		mutex_unlock(&msft->filter_lock);
